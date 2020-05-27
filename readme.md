@@ -17,7 +17,8 @@ Link : https://stackhack-todo.herokuapp.com/api
         -email
         -password
 
-        **x-auth-token returned here. Used to verfify the user. Keep in localstorge if possible the token is valid for 30 days.
+        **x-auth-token returned here. Used to verfify the user. 
+        **Keep in localstorge if possible the token is valid for 30 days.
 
     /api/verify/:token - GET
         -The link will be sent to the users mail. ( To be discussed later...)
