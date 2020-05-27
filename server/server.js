@@ -32,8 +32,8 @@ if (cluster.isMaster) {
     })
 
     require('./routeHandler')(app)
-
-    app.listen(3000, () => {
-        //console.log("Server is up on 3000")
+     var port=process.env.PORT || 3000
+    app.listen(port,process.env.IP, () => {
+        console.log(`"Server is up on ${port}"`) 
     })
 }
