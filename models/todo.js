@@ -34,7 +34,7 @@ priority :{
 
 user_id:{
     type: mongoose.Schema.Types.ObjectId,
-    //required:true
+    required:true
 },
 status:{
     type: Number,
@@ -58,7 +58,7 @@ sub_task:[{
             //required:true,
             default:Date.now()
         },
-                         //ohkayyy
+                         
         due_date:{
             type:Date , 
            // required:true
