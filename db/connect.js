@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect("mongodb://localhost/todo-app",{ useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true,useFindAndModify: false })
+mongoose.connect("mongodb+srv://root:toor@cluster0-kkzmc.mongodb.net/todo",{ useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true,useFindAndModify: false })
 
 var con = mongoose.connection
 con.on("open",()=>{
