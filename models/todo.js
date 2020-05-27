@@ -1,4 +1,5 @@
 const mongoose=require('mongoose')
+const joi = require("@hapi/joi");
 
 const todoSchema=new mongoose.Schema({
 
@@ -35,6 +36,11 @@ user_id:{
     type: mongoose.Schema.Types.ObjectId,
     //required:true
 },
+status:{
+    type: Number,
+    default: 0,
+    required: true
+},
 sub_task:[{
         task_title:{
             type:String,
@@ -61,10 +67,38 @@ sub_task:[{
         priority :{
             type:Number,
             //required:true
-        }  
+        },
+        status:{
+            type: Number,
+            default: 0
+        },  
     }]
 
     
 })
 
-module.exports=mongoose.model('Todo',todoSchema)
+function validateSchema(todo) {
+    const schema = joi.object().keys({
+        task_title: joi
+        .string()
+        .min(1)
+        .max(50)
+        .required(),
+        label: joi
+        .string()
+        .min(1)
+        .max(50)
+        .required(),
+        due_date: joi.date().required(),
+        priority: joi.number().valid(0,1,2).required(),
+        status: joi.number().valid(0,1,2)
+    });
+    return schema.validate(todo);
+  }
+
+const Todo=mongoose.model('Todo',todoSchema)
+
+module.exports = {
+    Todo,
+    validateTodo: validateSchema
+}
