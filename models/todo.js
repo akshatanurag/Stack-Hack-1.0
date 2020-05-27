@@ -1,5 +1,5 @@
 const mongoose=require('mongoose')
-const joi = require("@hapi/joi");
+const joi = require("@hapi/joi");    //new edit 
 
 const todoSchema=new mongoose.Schema({
 
@@ -29,14 +29,14 @@ due_date:{
 
 priority :{
     type:Number,
-    required:true         //haaaa
+    required:true         
 },
 
 user_id:{
     type: mongoose.Schema.Types.ObjectId,
     //required:true
 },
-status:{
+status:{      //new edit
     type: Number,
     default: 0,
     required: true

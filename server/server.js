@@ -4,6 +4,9 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 require('../db/connect')
 
+var app=express();
+app.use(express.json())   
+
 
 //copy 2
 if (cluster.isMaster) {
@@ -24,7 +27,7 @@ if (cluster.isMaster) {
     app.get("/api", (req, res) => {
         res.send({
             success: true,
-            message: "Todo API v1.0"
+            message: "Todo API v1.0"  
         })
     })
 
