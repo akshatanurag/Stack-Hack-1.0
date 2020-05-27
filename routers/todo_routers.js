@@ -3,7 +3,7 @@ const {Todo,validateTodo} = require('../models/todo.js')
 
 var router = express.Router()
 
-router.get("/todo", async (req, res) => {
+router.get("/todo", async (req, res) => { 
     try {
         const todo = await Todo.find()
         res.send({

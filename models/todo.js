@@ -77,7 +77,7 @@ sub_task:[{
     
 })
 
-function validateSchema(todo) {
+function validateSchema(todo) {  
     const schema = joi.object().keys({
         task_title: joi
         .string()
