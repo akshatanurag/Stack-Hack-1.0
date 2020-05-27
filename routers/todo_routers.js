@@ -6,7 +6,10 @@ var router = express.Router()
 router.get("/todo", async (req, res) => {
     try {
         const todo = await Todo.find()
-        res.json(todo)
+        res.send({
+            success: true,
+            message: todo
+        })
     } catch (err) {
         console.log(err)
         res.status(400).send("Try again")
@@ -22,7 +25,7 @@ router.post("/todo", async (req, res) =>
                 due_date,
                 priority
             } = req.body
-            const {error} = await validateTodo(input)
+            const {error} = validateTodo(input)
     
             if(error)
             return res.status(400).send({
@@ -31,7 +34,10 @@ router.post("/todo", async (req, res) =>
               });
             const todo = new Todo(input)
             await todo.save()
-            res.json(todo)
+            res.send({
+                success: true,
+                message: todo
+            })
         } catch (error) {
             return res.status(500).send({
                 success: false,
