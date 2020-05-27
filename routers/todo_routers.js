@@ -11,8 +11,11 @@ router.get("/todo", async (req, res) => {
             message: todo
         })
     } catch (err) {
-        console.log(err)
-        res.status(400).send("Try again")
+        //console.log(err)
+        return res.status(500).send({
+            success: false,
+            message: "Opps! Something went wrong..."
+        })
     }
 })
 
