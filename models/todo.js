@@ -28,7 +28,7 @@ due_date:{
 
 priority :{
     type:Number,
-    required:true
+    required:true         //haaaa
 },
 
 user_id:{
