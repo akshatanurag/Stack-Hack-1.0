@@ -17,13 +17,13 @@ label:{
 },
 
 created_at_date:{
-    type:Date,
+    type:Number,
     required:true,
     default:new Date(Date.now())
 },
 
 due_date:{
-    type:String , 
+    type:Number, 
     required:true
 },
 
@@ -89,7 +89,7 @@ function validateSchema(todo) {
         .min(1)
         .max(50)
         .required(),
-        due_date: joi.date().required(),
+        due_date: joi.number().required(),
         priority: joi.number().valid(0,1,2).required(),
         status: joi.number().valid(0,1,2)
     });
