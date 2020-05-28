@@ -19,7 +19,7 @@ label:{
 created_at_date:{
     type:Date,
     required:true,
-    default:Date.now()
+    default:new Date(Date.now())
 },
 
 due_date:{

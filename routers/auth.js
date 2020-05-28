@@ -32,7 +32,11 @@ router.post("/signup",async (req,res)=>{
     await user.save()
     return res.header('x-auth-token', token).send({
         success: true,
-        message: 'Sign up successful'
+        message: {
+          name:user.name,
+          user_id:user._id
+
+        }
     });
     }catch (error) {
         console.log(error)
@@ -89,7 +93,10 @@ router.post("/login",async (req,res)=>{
         const token = await userLogin.generateAuthToken(input.email);
             return res.header('x-auth-token', token).status(200).send({
               success: true,
-              message: 'logged in'
+              message: {
+                name:fetchUserData.name,
+                user_id:fetchUserData._id
+                      }
             });
     } catch(error){
         console.log(error)
