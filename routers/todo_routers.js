@@ -67,6 +67,13 @@ router.post("/todo", middlewareOrder, async (req, res) => {
 //* *************Update***************** *
 router.patch("/todo/:id",middlewareOrder,async (req, res) => {
     try {
+        let todoFind = await Todo.findOne({_id: req.params.id,user_id: req.currentUser._id})
+        if(!todoFind){
+            return res.status(401).send({
+                success: false,
+                message: "Access Denied"
+            })
+        }
         var input = {
             task_title,
             label,
@@ -112,6 +119,13 @@ router.patch("/todo/:id",middlewareOrder,async (req, res) => {
 //* **************Delete******************* *
 router.delete("/todo/:id",middlewareOrder,async (req, res) => {
     try {
+        let todoFind = await Todo.findOne({_id: req.params.id,user_id: req.currentUser._id})
+        if(!todoFind){
+            return res.status(401).send({
+                success: false,
+                message: "Access Denied"
+            })
+        }
         var id = req.params.id;
         var td = await Todo.findById(id)
         const td_del = await td.remove()
