@@ -5,11 +5,6 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 require('../db/connect')
 
-
-
-
-
-
 //copy 2
 if (cluster.isMaster) {
     //console.log(`Master ${process.pid} is running`);
