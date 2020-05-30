@@ -7,7 +7,20 @@ require('../db/connect')
 
 var app=express();
 app.use(express.json())
-app.use(cors())   
+
+var whitelist = ['http://localhost:4200', 'http://example2.com']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors(corsOptions)) 
+
 
 
 //copy 2
