@@ -30,7 +30,7 @@ if (cluster.isMaster) {
     app.use(cors({
         origin: ["http://localhost:4200"],
         exposedHeaders: ['x-auth-token'],
-        methods: ['GET','POST'],
+        methods: ['GET','POST','PATCH','DELETE'],
         credentials: true
       }));
     app.get("/api", (req, res) => {
