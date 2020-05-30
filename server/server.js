@@ -1,11 +1,13 @@
 const express = require('express')
+const cors = require('cors')
 //copy 1
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 require('../db/connect')
 
 var app=express();
-app.use(express.json())   
+app.use(express.json())
+app.use(cors())   
 
 
 //copy 2
