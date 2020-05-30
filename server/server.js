@@ -8,7 +8,7 @@ require('../db/connect')
 var app=express();
 app.use(express.json())
 
-var whitelist = ['http://localhost:4200', 'http://example2.com']
+var whitelist = ['http://localhost:4200']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
