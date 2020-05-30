@@ -16,9 +16,10 @@ router.get("/todo", middlewareOrder, async (req, res) => {
         const todo = await Todo.find({
             user_id: req.currentUser._id
         })
+        console.log(todo)
         res.send({
             success: true,
-            message: todo
+            tasks: todo
         })
     } catch (err) {
         console.log(err)
@@ -32,10 +33,11 @@ router.get("/todo", middlewareOrder, async (req, res) => {
 router.post("/todo", middlewareOrder, async (req, res) => {
     try {
         var input = {
-            task_title,
+            title,
             label,
-            due_date,
+            due_on,
             priority,
+            is_completed
         } = req.body
         const {
             error
@@ -65,7 +67,7 @@ router.post("/todo", middlewareOrder, async (req, res) => {
 })
 
 //* *************Update***************** *
-router.patch("/todo/:id",middlewareOrder,async (req, res) => {
+router.put("/todo/:id",middlewareOrder,async (req, res) => {
     try {
         let todoFind = await Todo.findOne({_id: req.params.id,user_id: req.currentUser._id})
         if(!todoFind){
@@ -75,11 +77,11 @@ router.patch("/todo/:id",middlewareOrder,async (req, res) => {
             })
         }
         var input = {
-            task_title,
+            title,
             label,
-            due_date,
+            due_on,
             priority,
-            status
+            is_completed
         } = req.body
         //{error} =validateTodo(input)
         const {error} = validateTodo(input) //new edit
@@ -92,7 +94,6 @@ router.patch("/todo/:id",middlewareOrder,async (req, res) => {
         var tdd = await Todo.updateOne({
             _id: req.params.id
         }, {$set:input})
-
         if(tdd.n&&tdd.nModified&&tdd.ok)
         return res.status(200).send({
             success: true,

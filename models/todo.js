@@ -5,7 +5,7 @@ const todoSchema=new mongoose.Schema({
 
  //task_title ,label ,created_at_date, due_date , priority ,user_id(foreign key) ,sub_task(Array object type)
 
-task_title:{
+title:{
     type:String,
     required:true
 },
@@ -16,13 +16,13 @@ label:{
 
 },
 
-created_at_date:{
+created_on:{
     type:Number,
     required:true,
     default:new Date(Date.now())
 },
 
-due_date:{
+due_on:{
     type:Number, 
     required:true
 },
@@ -36,13 +36,13 @@ user_id:{
     type: mongoose.Schema.Types.ObjectId,
     required:true
 },
-status:{      //new edit
+is_completed:{      //new edit
     type: Number,
     default: 0,
     required: true
 },
 sub_task:[{
-        task_title:{
+        title:{
             type:String,
             //required:true
         },
@@ -53,13 +53,13 @@ sub_task:[{
         
         },
         
-        created_at_date:{
+        created_on:{
             type:Date,
             //required:true,
             default:Date.now()
         },
                          
-        due_date:{
+        due_on:{
             type:Date , 
            // required:true
         },
@@ -68,7 +68,7 @@ sub_task:[{
             type:Number,
             //required:true
         },
-        status:{
+        is_completed:{
             type: Number,
             default: 0
         },  
@@ -79,7 +79,7 @@ sub_task:[{
 
 function validateSchema(todo) {  
     const schema = joi.object().keys({
-        task_title: joi
+        title: joi
         .string()
         .min(1)
         .max(50)
@@ -89,9 +89,9 @@ function validateSchema(todo) {
         .min(1)
         .max(50)
         .required(),
-        due_date: joi.number().required(),
+        due_on: joi.number().required(),
         priority: joi.number().valid(0,1,2).required(),
-        status: joi.number().valid(0,1,2)
+        is_completed: joi.number().valid(0,1,2)
     });
     return schema.validate(todo);
   }
