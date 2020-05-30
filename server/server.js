@@ -5,21 +5,8 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 require('../db/connect')
 
-var app=express();
-app.use(express.json())
 
-var whitelist = ['http://localhost:4200']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
 
-app.use(cors(corsOptions)) 
 
 
 
@@ -37,8 +24,15 @@ if (cluster.isMaster) {
     });
 } else {
     //code here
+
     var app = express();
     app.use(express.json())
+    app.use(cors({
+        origin: ["http://localhost:4200"],
+        exposedHeaders: ['x-auth-token'],
+        methods: ['GET','POST'],
+        credentials: true
+      }));
     app.get("/api", (req, res) => {
         res.send({
             success: true,
