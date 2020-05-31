@@ -33,9 +33,10 @@ router.post("/signup",async (req,res)=>{
     return res.header('x-auth-token', token).send({
         success: true,
         message: {
+          id:user._id,
           name:user.name,
-          user_id:user._id
-
+          email: user.email,
+          email_status: user.verify.status
         }
     });
     }catch (error) {
@@ -94,8 +95,10 @@ router.post("/login",async (req,res)=>{
             return res.header('x-auth-token', token).status(200).send({
               success: true,
               message: {
+                _id: fetchUserData._id,
                 name:fetchUserData.name,
-                user_id:fetchUserData._id
+                email: fetchUserData.email,
+                email_status: fetchUserData.verify.status
                       }
             });
     } catch(error){
