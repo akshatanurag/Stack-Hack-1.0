@@ -18,8 +18,8 @@ label:{
 
 created_on:{
     type:Number,
-    required:true,
-    default:new Date(Date.now())
+    required:false,
+    default:null
 },
 
 due_on:{
@@ -37,9 +37,12 @@ user_id:{
     required:true
 },
 is_completed:{      //new edit
-    type: Number,
-    default: 0,
-    required: true
+    type: Boolean,
+    default: false,
+},
+task_date:{
+    type: Date,
+    default: Date.now()
 },
 sub_task:[{
         title:{
@@ -69,8 +72,9 @@ sub_task:[{
             //required:true
         },
         is_completed:{
-            type: Number,
-            default: 0
+            type: Boolean,
+            default: false,
+            required: true
         },  
     }]
 
@@ -91,7 +95,8 @@ function validateSchema(todo) {
         .required(),
         due_on: joi.number().required(),
         priority: joi.number().valid(0,1,2).required(),
-        is_completed: joi.number().valid(0,1,2)
+        is_completed: joi.boolean(),
+        created_on: joi.number()
     });
     return schema.validate(todo);
   }

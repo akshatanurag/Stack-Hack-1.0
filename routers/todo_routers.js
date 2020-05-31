@@ -16,7 +16,7 @@ router.get("/todo", middlewareOrder, async (req, res) => {
         const todo = await Todo.find({
             user_id: req.currentUser._id
         })
-        console.log(todo)
+        //console.log(todo)
         res.send({
             success: true,
             tasks: todo
@@ -37,7 +37,7 @@ router.post("/todo", middlewareOrder, async (req, res) => {
             label,
             due_on,
             priority,
-            is_completed
+            created_on
         } = req.body
         const {
             error
@@ -81,7 +81,8 @@ router.put("/todo/:id",middlewareOrder,async (req, res) => {
             label,
             due_on,
             priority,
-            is_completed
+            is_completed,
+            created_on
         } = req.body
         //{error} =validateTodo(input)
         const {error} = validateTodo(input) //new edit
