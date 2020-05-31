@@ -23,9 +23,8 @@ if (cluster.isMaster) {
     var app = express();
     app.use(express.json())
     app.use(cors({
-        origin: ["https://todo-application-a7a5c.web.app","http://localhost:4200"],
+        origin: ["http://localhost:4200","https://todo-application-a7a5c.web.app"],
         exposedHeaders: ['x-auth-token'],
-        methods: ['GET','POST','PUT','PATCH','DELETE'],
         credentials: true
       }));
     app.get("/api", (req, res) => {
