@@ -1,6 +1,7 @@
 const express = require('express')
 const joi = require("@hapi/joi");
 const randomString = require('randomstring')
+const {sendMail} = require('../utils/mail')
 
 
 const {User,Validate} = require('../models/user')
@@ -27,9 +28,10 @@ router.post("/signup",async (req,res)=>{
     const user = new User(input) 
     user.password = await user.generateHash(input.password) //encrpypting the password 
     let token = await user.generateAuthToken(input.email)
-    user.verify.token = randomString.generate(50)
+    user.verify.token = await randomString.generate(50)
     //console.log(token)
     await user.save()
+    await sendMail(req.body.email,user.verify.token)
     return res.header('x-auth-token', token).send({
         success: true,
         message: {
