@@ -1,6 +1,6 @@
 const sgMail = require('@sendgrid/mail')
 
-sgMail.setApiKey('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')
+sgMail.setApiKey('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')
 
 let sendMail = async(toEmail,token)=>{
     try {
@@ -9,13 +9,15 @@ let sendMail = async(toEmail,token)=>{
             from: 'todo@taybill.in',
             subject: 'Verify Your Email Please!',
             text: 'and easy to do anywhere, even with Node.js',
-            html: `https://stackhack-todo.herokuapp.com/api/verify/${token}`,
+            html: `https://stackhack-todo.herokuapp.com/api/verify/?token=${token}`,
           };
-          await sgMail.send(msg) 
+          await sgMail.send(msg)
+          return true; 
     } catch (error) {
         if(error.response){
             console.log(error.response.body)
         }
+        return false
     }
 
 

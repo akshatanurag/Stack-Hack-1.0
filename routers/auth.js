@@ -12,6 +12,13 @@ router.post("/signup",async (req,res)=>{
     try{
     input ={name,email,password} = req.body // getting the input from the clients
 
+    if(await User.findOne({email: input.email})){ //this will simply check the db for any duplicate emails and infrom the user about redundancy 
+      return res.status(400).send({
+          success: false,
+          message: "Email Taken"
+      })
+  }
+
     const { error } = Validate(input);
     if (error)
       return res.status(400).send({
@@ -19,19 +26,20 @@ router.post("/signup",async (req,res)=>{
         message: error.details[0].message
       });
 
-    if(await User.findOne({enail: input.email})){ //this will simply check the db for any duplicate emails and infrom the user about redundancy 
-        return res.send(400).send({
-            success: false,
-            message: "Email Taken"
-        })
-    }
+
     const user = new User(input) 
     user.password = await user.generateHash(input.password) //encrpypting the password 
     let token = await user.generateAuthToken(input.email)
     user.verify.token = await randomString.generate(50)
     //console.log(token)
+    
+    if(await sendMail(req.body.email,user.verify.token))
     await user.save()
-    await sendMail(req.body.email,user.verify.token)
+    else
+    return res.status(400).send({
+      success: false,
+      message: 'Uable to sign you up'
+    });
     return res.header('x-auth-token', token).send({
         success: true,
         message: {

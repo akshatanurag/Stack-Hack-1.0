@@ -8,7 +8,7 @@ const middleware = require('../middlewares/middleware')
 var router = express.Router()
 
 
-const middlewareOrder = [middleware.isLoggedIn, middleware.isVerified]
+const middlewareOrder = [middleware.isLoggedIn]
 
 router.get("/todo", middlewareOrder, async (req, res) => {
     try {
