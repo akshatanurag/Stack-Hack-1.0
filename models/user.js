@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     verify:{
       status:{
         type: Boolean,
-        default: false
+        default: true
       },
       token:{
         type: String,
