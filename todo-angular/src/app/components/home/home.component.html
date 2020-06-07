@@ -1,0 +1,15 @@
+<div mdbCollapse #test="bs-collapse">
+  <app-filter-bar></app-filter-bar>
+</div>
+<div class="row">
+  <div class="col-lg-10">
+    <app-searh-bar></app-searh-bar>
+  </div>
+  <div class="col-lg-2 pt-1">
+    <button mdbBtn rounded="true" class="filter-btn float-right waves-light light-blue darken-1" type="button" (click)="test.toggle()" mdbWavesEffect>
+      <mdb-icon fas icon="filter"></mdb-icon>
+    </button>
+    <app-add-task class="float-right"></app-add-task>
+  </div>
+</div>
+<app-todo-list></app-todo-list>

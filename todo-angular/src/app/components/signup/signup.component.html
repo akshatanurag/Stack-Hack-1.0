@@ -1,0 +1,51 @@
+<div class="row">
+	<div class="col-md-6 offset-md-3">
+		<p *ngIf="error!== null" style="color: #f44336; font-size: 0.8rem;" class="text-center"> {{ errorMsg }} </p>
+		<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+			<div class="md-form ">
+				<input mdbValidate formControlName="name" type="text" class="form-control" id="name" name="name"
+					mdbInput>
+				<label for="name">Name</label>
+				<mdb-error
+					*ngIf="signupForm.get('name').invalid && (signupForm.get('name').dirty || signupForm.get('name').touched)">
+					This field is required
+				</mdb-error>
+			</div>
+			<div class="md-form">
+				<input type="email" id="email" formControlName="email" class="form-control" mdbInput mdbValidate>
+				<label for="email">Your email</label>
+				<mdb-error
+					*ngIf="signupForm.get('email').invalid && (signupForm.get('email').dirty || signupForm.get('email').touched)">
+					Please Enter a valid email address
+				</mdb-error>
+			</div>
+			<div class="md-form mb-4">
+				<input type="password" id="password" formControlName="password" class="form-control" mdbInput
+					mdbValidate>
+				<label for="password">Your password</label>
+				<div
+					*ngIf="signupForm.get('password').invalid && (signupForm.get('password').dirty || signupForm.get('password').touched)">
+					<mdb-error>
+						Password must have at least 8 characters including upper case, lower case, number
+						and special characters
+					</mdb-error>
+					<div><br></div>
+				</div>
+			</div>
+
+			<div class="md-form mb-4">
+				<input type="password" id="passwordCnf" formControlName="passwordCnf" class="form-control" mdbInput
+					mdbValidate>
+				<label for="passwordCnf">Confirm Password</label>
+				<mdb-error
+					*ngIf="signupForm.get('passwordCnf').invalid && (signupForm.get('passwordCnf').dirty || signupForm.get('passwordCnf').touched)">
+					Passwords do not match
+				</mdb-error>
+			</div>
+			<div class="d-flex justify-content-center">
+				<button [disabled]="signupForm.pristine || signupForm.invalid || submitBtnDisabled" type="submit" mdbBtn color="info"
+					class="waves-light" mdbWavesEffect>Sign Up</button>
+			</div>
+		</form>
+	</div>
+</div>

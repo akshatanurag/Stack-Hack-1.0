@@ -1,0 +1,55 @@
+<button type="button" mdbBtn rounded="true" data-toggle="modal" class="add-btn unique-color" (click)="frame.show()" mdbWavesEffect mdbTooltip="Add Task" placement="bottom">
+	<mdb-icon fas icon="plus"></mdb-icon>
+</button>
+<!-- Add Task Modal -->
+<div mdbModal #frame="mdbModal" class="modal fade top p-5" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header text-center pb-5">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+					<mdb-icon fas icon="times"></mdb-icon>
+				</button>
+			</div>
+			<div class="modal-body mx-3">
+				<form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
+					<div class="md-form ">
+						<input mdbValidate formControlName="title" type="text" class="form-control" id="title" name="title"
+							mdbInput>
+						<label for="title">Title</label>
+						<mdb-error
+							*ngIf="addTaskForm.get('title').invalid && (addTaskForm.get('title').dirty || addTaskForm.get('title').touched)">
+							This field is required</mdb-error>
+					</div>
+					<div class="md-form">
+						<input mdbValidate formControlName="label" type="text" class="form-control" id="label" name="label"
+							mdbInput>
+						<label for="label">Label</label>
+						<mdb-error
+							*ngIf="addTaskForm.get('label').invalid && (addTaskForm.get('label').dirty || addTaskForm.get('label').touched)">
+							This field is required</mdb-error>
+					</div>
+					<div class="md-form">
+						<input formControlName="due_on" [bsConfig]="bsConfig" type="text"
+							class="form-control" bsDatepicker mdbValidate mdbInput id="due_on">
+							<label for="due_on">Due Date</label>
+							<mdb-error
+							*ngIf="addTaskForm.get('due_on').invalid && (addTaskForm.get('due_on').dirty || addTaskForm.get('due_on').touched)">
+							Please Select a Valid Future Date</mdb-error>
+					</div>
+					<div class="md-form">
+						<select mdbValidate formControlName="priority" class="form-control" id="priority">
+							<option value="0">Low</option>
+							<option value="1">Medium</option>
+							<option value="2">High</option>
+						</select>
+					</div>
+					<div class="modal-footer d-flex justify-content-center">
+						<button [disabled]="addTaskForm.pristine || addTaskForm.invalid" type="submit" mdbBtn color="info"
+							class="waves-light" mdbWavesEffect data-dismiss="modal" aria-label="Close"
+							(click)="frame.hide()">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

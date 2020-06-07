@@ -1,0 +1,7 @@
+<div class="container px-5">
+	<div @exitTrigger *ngFor="let task of tasks; let i = index">
+		<app-todo-list-item [index]="i" [todoListItem]="task">
+		</app-todo-list-item>
+	</div>
+</div>
+<app-spinner *ngIf="isLoading"></app-spinner>

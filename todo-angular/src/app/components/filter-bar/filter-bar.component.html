@@ -1,0 +1,27 @@
+<mdb-card class="mt-4">
+	<mdb-card-body>
+		<form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="form-inline">
+			<label class="mr-2" for="priority">Priority</label>
+			<select formControlName="priority" class="custom-select mr-sm-2" id="priority">
+				<option value="0">All</option>
+				<option value="1">Low</option>
+				<option value="2">Medium</option>
+				<option value="3">High</option>
+			</select>
+			<label class="ml-2 mr-2" for="label">Label</label>
+			<select formControlName="label" class="custom-select mr-sm-2" id="label">
+				<option value="0">All</option>
+				<option value="1">Work</option>
+				<option value="2">School</option>
+				<option value="3">Hackerzzz</option>
+			</select>
+			<label class="ml-2 mr-2" for="status">Status</label>
+			<select formControlName="status" class="custom-select mr-sm-2" id="status">
+				<option value="0">All</option>
+				<option value="1">Completed</option>
+				<option value="2">Pending</option>
+			</select>
+			<button type="submit" class="btn btn-primary ml-lg-auto">Filter</button>
+		</form>
+	</mdb-card-body>
+</mdb-card>
